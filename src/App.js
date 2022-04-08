@@ -23,22 +23,32 @@ function App() {
       }
     })
   }, [name, username, phone, email, list])
-  console.log(filteredUser)
+
   useEffect(() => {
     async function api() {
       await fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json().then(data => setList(data))).catch(err => err)
     }
     api();
+
     setLoading(false)
   }, [])
+
   return (
     <div className="App">
       <table>
         <tr>
-          <th>Name <input type='text' value={name} onChange={(e) => setName(e.target.value)} /></th>
-          <th>Username <input type='text' value={username} onChange={(e) => setUsername(e.target.value)} /></th>
-          <th>Email <input type='text' value={email} onChange={(e) => setEmail(e.target.value)} /></th>
-          <th>Phone <input type='text' value={phone} onChange={(e) => setPhone(e.target.value)} /></th>
+          <th>Name:
+            <input placeholder='search...' type='text' value={name} onChange={(e) => setName(e.target.value)} />
+          </th>
+          <th>Username:
+            <input placeholder='search...' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
+          </th>
+          <th>Email:
+            <input placeholder='search...' type='text' value={email} onChange={(e) => setEmail(e.target.value)} />
+          </th>
+          <th>Phone:
+            <input placeholder='search...' type='text' value={phone} onChange={(e) => setPhone(e.target.value)} />
+          </th>
         </tr>
         {loading ? <h2>Loading</h2>
           :

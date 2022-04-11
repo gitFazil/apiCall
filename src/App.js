@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import { useEffect, useMemo, useState } from 'react'
 import './App.css';
 
+
 function App() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('');
@@ -36,30 +37,35 @@ function App() {
   return (
     <div className="App">
       <table>
-        <tr>
-          <th>Name:
-            <input placeholder='search...' type='text' value={name} onChange={(e) => setName(e.target.value)} />
-          </th>
-          <th>Username:
-            <input placeholder='search...' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
-          </th>
-          <th>Email:
-            <input placeholder='search...' type='text' value={email} onChange={(e) => setEmail(e.target.value)} />
-          </th>
-          <th>Phone:
-            <input placeholder='search...' type='text' value={phone} onChange={(e) => setPhone(e.target.value)} />
-          </th>
-        </tr>
-        {loading ? <h2>Loading</h2>
-          :
-          filteredUser.map(user => {
-            return (<tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>{user.phone}</td>
-            </tr>)
-          })}
+        <thead>
+          <tr>
+            <th>Name:
+              <input placeholder='search...' type='text' value={name} onChange={(e) => setName(e.target.value)} />
+            </th>
+            <th>Username:
+              <input placeholder='search...' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
+            </th>
+            <th>Email:
+              <input placeholder='search...' type='text' value={email} onChange={(e) => setEmail(e.target.value)} />
+            </th>
+            <th>Phone:
+              <input placeholder='search...' type='text' value={phone} onChange={(e) => setPhone(e.target.value)} />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {loading ? <tr><td>Loading..............</td></tr>
+            :
+            filteredUser.map(user => {
+              return (<tr key={user.id}>
+                <td>{user.name}</td>
+                <td>{user.username}</td>
+                <td>{user.email}</td>
+                <td>{user.phone}</td>
+              </tr>)
+            })}
+        </tbody>
+
       </table>
     </div>
   );

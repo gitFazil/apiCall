@@ -1,10 +1,10 @@
-import logo from './logo.svg';
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import './App.css';
 
-
+let timer = null;
 function App() {
   const [name, setName] = useState('')
+  const [inpName, setInpName] = useState('')
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [phone, setPhone] = useState('')
@@ -34,22 +34,29 @@ function App() {
     setLoading(false)
   }, [])
 
+  const debouncedChangeHandler = (e) => {
+    setInpName(e.target.value);
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => setName(inpName), 500)
+  }
+
+
   return (
     <div className="App">
       <table>
         <thead>
           <tr>
             <th>Name:
-              <input placeholder='search...' type='text' value={name} onChange={(e) => setName(e.target.value)} />
+              <input placeholder='search...' type='text' value={inpName} onChange={debouncedChangeHandler} />
             </th>
             <th>Username:
-              <input placeholder='search...' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
+              <input placeholder='search...' type='text' onChange={(e) => setUsername(e.target.value)} />
             </th>
             <th>Email:
-              <input placeholder='search...' type='text' value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input placeholder='search...' type='text' onChange={(e) => setEmail(e.target.value)} />
             </th>
             <th>Phone:
-              <input placeholder='search...' type='text' value={phone} onChange={(e) => setPhone(e.target.value)} />
+              <input placeholder='search...' type='text' onChange={(e) => setPhone(e.target.value)} />
             </th>
           </tr>
         </thead>

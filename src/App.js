@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import './App.css';
 
 let timer = null;
@@ -35,9 +35,10 @@ function App() {
   }, [])
 
   const debouncedChangeHandler = (e) => {
-    setInpName(e.target.value);
+    let value = e.target.value
+    setInpName(value);
     if (timer) clearTimeout(timer);
-    timer = setTimeout(() => setName(inpName), 500)
+    timer = setTimeout(() => setName(value), 500)
   }
   useEffect(() => {
     console.log('api call')

@@ -39,7 +39,9 @@ function App() {
     if (timer) clearTimeout(timer);
     timer = setTimeout(() => setName(inpName), 500)
   }
-
+  useEffect(() => {
+    console.log('api call')
+  }, [name])
 
   return (
     <div className="App">
